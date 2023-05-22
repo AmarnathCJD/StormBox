@@ -78,13 +78,13 @@ func (t *ActiveTorrent) FromTorrent(torrent *t.Torrent) {
 	if ts.ETA != nil {
 		t.Eta = ts.ETA.String()
 	}
-	if oderId, ok := ActiveOrder[t.ID]; ok {
-		t.OrderID = oderId + 1
+	if orderId, ok := ActiveOrder[t.ID]; ok {
+		t.OrderID = orderId + 1
 	}
 }
 
 func sortTorrents(ts []ActiveTorrent) []ActiveTorrent {
-	// sort alphabatically based on torrent ID
+	// sort alphabatically based on torrent OrderID, to prevent inteference in Website
 	sort.SliceStable(ts, func(i, j int) bool {
 		return ts[i].OrderID < ts[j].OrderID
 	})

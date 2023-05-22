@@ -29,11 +29,11 @@ func regsiterHTTPHandles() {
 		}
 		d := NewDownloader(magnet)
 		t, err := d.Start()
-		ActiveOrder[t.ID()] = len(ActiveOrder)
 		if nil != err {
 			http.Error(w, fmt.Sprintf(`{"error": "%s"}`, err.Error()), http.StatusBadRequest)
 			return
 		}
+		ActiveOrder[t.ID()] = len(ActiveOrder)
 		fmt.Fprintf(w, `StormBox - INFO: Torrent %s added`, t.Name())
 	})
 	http.HandleFunc("/api/torrents/list", func(w http.ResponseWriter, r *http.Request) {

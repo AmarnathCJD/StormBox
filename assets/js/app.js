@@ -1,5 +1,18 @@
 var app = {
-    init: function () { },
+    init: function () { 
+        document.getElementById('url_entry').addEventListener('keyup', function (event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                addNewTorrent();
+            }
+        });
+        
+        document.getElementById('url_submit').addEventListener('click', function (event) {
+            addNewTorrent();
+        });
+
+        Alert("Connected to server", "info")
+    },
     update: function () {},
     socket: new WebSocket("ws://" + window.location.host + "/ws"),
     torrent_socket: new WebSocket("ws://" + window.location.host + "/ws/torrents")
@@ -18,11 +31,28 @@ app.socket.onmessage = function (event) {
 
 app.torrent_socket.onmessage = function (event) {
     var data = JSON.parse(event.data);
-    var torrents = sortJsonListAlphabeticsllyBasedOnNameField(data)
     var table = document.getElementById('downloads');
+    if (data == null) {
+        table.innerHTML = '';
+        table.innerHTML = `<li class="py-3 sm:py-4">
+        <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0">
+                <img class="w-8 h-8 rounded-full" src="https://img.icons8.com/pastel-glyph/128/FAB005/magnet.png"
+                    alt="Torrent-Icon">
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    No Active Downloads
+                </p>
+             </div>
+        </div>
+    </li>`
+        return;
+    }
+        
+    var torrents = sortJsonListAlphabeticsllyBasedOnNameField(data)
     table.innerHTML = '';
     for (var i = 0; i < torrents.length; i++) {
-        console.log(torrents[i]);
         var status = "Unknown"
         var torr = torrents[i];
         if (torr.percentage == 100) {
@@ -77,6 +107,12 @@ function getTextColor(message) {
 
 function sortJsonListAlphabeticsllyBasedOnNameField(jsonList) {
     return jsonList.sort(function (a, b) {
+        if (a.name == null) {
+            a.name = "Downloading Metadata"
+        }
+        if (b.name == null) {
+            b.name = "Downloading Metadata"
+        }
         var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase()
         if (nameA < nameB) //sort string ascending
             return -1
@@ -84,6 +120,26 @@ function sortJsonListAlphabeticsllyBasedOnNameField(jsonList) {
             return 1
         return 0 //default return value (no sorting)
     })
+}
+
+function addNewTorrent() {
+    var url = document.getElementById('url_entry').value;
+    if (url == null || url == "") {
+        alert("Please enter a valid URL")
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/api/torrents/add", true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send("magnet=" + url);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById('url_entry').value = "";
+            Alert("Torrent Added Successfully", "success")
+        } else if (xhr.readyState == 4 && xhr.status != 200) {
+            Alert("Failed to add torrent", "error")
+        }
+    }
 }
 
 app.init();
