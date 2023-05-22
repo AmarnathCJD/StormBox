@@ -11,7 +11,7 @@ import (
 func main() {
 	regsiterHTTPHandles()
 	setupWS()
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8000", nil)
 }
 
 func regsiterHTTPHandles() {
