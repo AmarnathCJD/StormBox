@@ -99,7 +99,7 @@ app.torrent_socket.onmessage = function (event) {
             document.getElementById("modal_name").innerHTML = torr.name;
             document.getElementById("modal_perc").innerHTML = torr.percentage + "%";
             document.getElementById("modal_progress").style.width = torr.percentage + "%";
-            getTorrentFiles(torr.id);
+            updateTorrentFiles(torr.files);
         }
 
         var row = `<li class="py-3 sm:py-4">
@@ -247,19 +247,22 @@ function resumeTorrent(id) {
     };
 }
 
-function getTorrentFiles(id) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "/api/torrents/files?id=" + id, true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var files = JSON.parse(xhr.responseText);
-            var table = document.getElementById("files_manager");
-            table.innerHTML = "";
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var row = `<li class="flex items-center justify-between py-2.5">
+function updateTorrentFiles(files) {
+    var table = document.getElementById("files_manager");
+    if (files == null) {
+        table.innerHTML = "";
+        table.innerHTML = `<div class="flex items-center justify-center">
+        <div class="flex flex-col items-center">
+            <p class="text-gray-500 dark:text-gray-400 text-xl font-medium mb-4">No Files Found</p>
+            <img class="w-10 h-10" src="https://img.icons8.com/ios/100/000000/nothing-found.png" alt="nothing found"/>
+        </div>
+    </div>`;
+        return;
+    }
+    table.innerHTML = "";
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        var row = `<li class="flex items-center justify-between py-2.5">
                 <div class="flex items-center truncate  items-center space-x-2">
                 <div class="flex-shrink-0">
                     ${getFileTypeSvg(file.name)}
@@ -282,18 +285,13 @@ function getTorrentFiles(id) {
                     </button>
                 </div>
             </li>`;
-                table.innerHTML += row;
-            }
-        } else if (xhr.readyState == 4 && xhr.status != 200) {
-            Alert("Failed to get torrent files", "error");
-        }
-    };
+        table.innerHTML += row;
+    }
 }
 
 function getFileTypeSvg(filename) {
     var ext = filename.split('.').pop();
     ext = ext.toLowerCase();
-    // all document types
     if (ext == "doc" || ext == "docx" || ext == "odt" || ext == "pdf" || ext == "ppt" || ext == "pptx" || ext == "xls" || ext == "xlsx") {
         return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark" viewBox="0 0 16 16"><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/></svg>`;
     } else if (ext == "zip" || ext == "rar" || ext == "7z" || ext == "tar" || ext == "gz" || ext == "xz") {
@@ -305,12 +303,7 @@ function getFileTypeSvg(filename) {
     } else if (ext == "mp4" || ext == "mkv" || ext == "avi" || ext == "mov" || ext == "wmv" || ext == "flv" || ext == "webm" || ext == "mpg" || ext == "mpeg" || ext == "m4v" || ext == "3gp" || ext == "3g2" || ext == "m2v" || ext == "m4p" || ext == "m2p" || ext == "mp2" || ext == "mpv" || ext == "mpe" || ext == "mpv2" || ext == "mp2v" || ext == "m2ts" || ext == "mts" || ext == "ts" || ext == "tts" || ext == "asf" || ext == "ogm" || ext == "ogv" || ext == "vob" || ext == "rm" || ext == "rmvb" || ext == "drc" || ext == "xvid") {
         return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-play" viewBox="0 0 16 16"><path d="M6 6.883v4.234a.5.5 0 0 0 .757.429l3.528-2.117a.5.5 0 0 0 0-.858L6.757 6.454a.5.5 0 0 0-.757.43z"/><path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/></svg>`
     } else {
-        return `<svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="currentColor"
-        viewBox="0 0 20 20">
-        <path fill-rule="evenodd"
-            d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-6a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm0-4a1 1 0 011 1v2a1 1 0 11-2 0V7a1 1 0 011-1z"
-            clip-rule="evenodd"></path>
-    </svg>`
+        return `<svg aria-hidden="true" class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd"d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 100-12 6 6 0 000 12zm0-6a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm0-4a1 1 0 011 1v2a1 1 0 11-2 0V7a1 1 0 011-1z"clip-rule="evenodd"></path></svg>`
     }
 }
 

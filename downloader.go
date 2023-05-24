@@ -51,16 +51,17 @@ func (d *Downloader) Start() (*t.Torrent, error) {
 }
 
 type ActiveTorrent struct {
-	ID            string `json:"id,omitempty"`
-	OrderID       int    `json:"order_id,omitempty"` // used for sorting
-	Name          string `json:"name,omitempty"`
-	TotalSize     string `json:"total_size,omitempty"`
-	Downloaded    string `json:"downloaded,omitempty"`
-	Percentage    string `json:"percentage,omitempty"`
-	DownloadSpeed string `json:"download_speed,omitempty"`
-	Seeders       int    `json:"seeders,omitempty"`
-	Peers         int    `json:"peers,omitempty"`
-	Eta           string `json:"eta,omitempty"`
+	ID            string        `json:"id,omitempty"`
+	OrderID       int           `json:"order_id,omitempty"` // used for sorting
+	Name          string        `json:"name,omitempty"`
+	TotalSize     string        `json:"total_size,omitempty"`
+	Downloaded    string        `json:"downloaded,omitempty"`
+	Percentage    string        `json:"percentage,omitempty"`
+	DownloadSpeed string        `json:"download_speed,omitempty"`
+	Seeders       int           `json:"seeders,omitempty"`
+	Peers         int           `json:"peers,omitempty"`
+	Eta           string        `json:"eta,omitempty"`
+	Files         []torrentFile `json:"files,omitempty"`
 }
 
 func (t *ActiveTorrent) FromTorrent(torrent *t.Torrent) {
@@ -81,6 +82,9 @@ func (t *ActiveTorrent) FromTorrent(torrent *t.Torrent) {
 	}
 	if orderId, ok := ActiveOrder[t.ID]; ok {
 		t.OrderID = orderId + 1
+	}
+	if tf := getTorrentFilesList(torrent); len(tf) > 0 {
+		t.Files = tf
 	}
 }
 
