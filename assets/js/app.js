@@ -24,7 +24,7 @@ var app = {
         "ws://" + window.location.host + "/ws/torrents"
     ),
 
-    open_model_id: "TzBhJPoEEe2Lz-Bw6jNGKA",
+    open_model_id: "CTUQP_jgEe261RIPPqN51A",
 };
 
 app.socket.onmessage = function (event) {
