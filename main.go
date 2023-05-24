@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"path/filepath"
 
 	"github.com/gorilla/websocket"
 )
@@ -122,6 +123,20 @@ func regsiterHTTPHandles() {
 			return
 		}
 		fmt.Fprint(w, string(b))
+	})
+
+	http.HandleFunc("/api/torrents/files/download", func(w http.ResponseWriter, r *http.Request) {
+		r.ParseForm()
+		file_path := r.Form.Get("file_name")
+		id := r.Form.Get("id")
+		torrent_name := r.Form.Get("torrent_name")
+		if file_path == "" {
+			http.Error(w, `{"error": "file_path is empty"}`, http.StatusBadRequest)
+			return
+		}
+		fmt.Println("Downloading file", filepath.Join("data", id, torrent_name, file_path))
+		abs_path := filepath.Join("data", file_path)
+		http.ServeFile(w, r, abs_path)
 	})
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
