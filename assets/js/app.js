@@ -315,7 +315,7 @@ function getFileTypeSvg(filename) {
 }
 
 function openModal(id) {
-    open_model_id = id;
+    app.open_model_id = id;
     modal.show();
 }
 
