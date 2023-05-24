@@ -5,23 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link href="/assets/css/rubik.css" rel="stylesheet">
 </head>
 
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
-
-    body {
-        font-family: 'Rubik', sans-serif !important;
-        font-size: 14px;
-    }
-</style>
-
 <body class="bg-gray-100 dark:bg-gray-900">
-
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
             <a href="/" class="flex items-center">
-                <img src="https://img.icons8.com/cute-clipart/64/cloud.png" class="h-8 mr-3" alt="Flowbite Logo" />
+                <img src="data:image/png;base64,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"
+                    class="h-8 mr-3" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">StormBox</span>
             </a>
             <div class="flex items-center">
@@ -60,7 +52,7 @@
         </div>
     </nav>
 
-    <div class="absolute left-1/2 transform -translate-x-1/2" id="alerts"></div>
+    <div class="z-20 absolute left-1/2 transform -translate-x-1/2" id="alerts"></div>
     <hr class="border-gray-100 dark:border-gray-700">
     <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <div class="border-t border-gray-200 dark:border-gray-600">
@@ -70,12 +62,11 @@
                     class="grid max-w-screen-xl grid-cols-2 gap-6 mx-auto text-gray-900 lg:grid-cols-4 dark:text-white sm:p-8">
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-md p-3">
                         <div class="flex items-center">
-                            <img src="https://img.icons8.com/ios-filled/100/FA5252/smartphone-cpu.png" alt="Image"
-                                class="w-10 h-10">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACtklEQVR4nO2dTW7UQBCFvYI78HOfrBLVk+YSEDhdFG4AYQHhKihxpK7NoJaIxAahGbfp5/b3pFpZirve19XucuTpaUIIIYQQQgghUx0vLl5mxMcScVciHlM6EvqrB9Wj6lVK18fD4UVTGPPh8DqlHwDQuZPwvnrYrjKAcVw8GSO+N6mUukxRGWqzPEe8XwykSF8BoiZAivRlOZCIB4CoDZCIh8VAgKGmu0mAyGt7bgekSDd1CzhHvCnS7dau52hAaqLPf/vp6urt1q4nQASQlZes2zoL6+wr0qetXc/RKmTvMQFE3SEARP2NB4j6mw0Q9TcYIOpvKkDU30iAqL95mwSy9rufNI9T818dyNrvftI8Ts3fFsjzzJrMNJ9Y6XZAzn3382cibno6bWKdlP/iwa1V6pO50jVv24GtLNu8/9fA1rpPmo0HINoZkHP7kFEqpIzSh4wCZHbb9gIkxuhDRqmQMmofslUgufA+ABFAqBBRIcfdLln0IaIPSaOHOn2IvHZZdkDoQ0QfkkYVsvQ+zSvE3YA0Gw9ABBCrGZl7A0IfIvqQNKoQu20v/w8JLyD0IaIPSaMly+6h7m5Amo0HIAKI1YzMvQGhDxF9SBpVCH2IvJYsOyD0IaIPSaMKWXqf5hXibkCajWczQNyUrnnbDmxl2ea9Vh8y0EefN0N8H/K8O5vM9LTga2KLbS8/HBBeQNb+jcI0j2G+D9lrTABRdwgAUX/jAaL+ZgNE/Q0GiPqbChD1NxIg6m/eLoD0Pv+jcH6I1/kfM+eHeBk6A2Rb54MUzg/ZV0xuD/W9x7RUHCypZjBKxM8WQO4cZlYOEEX6vBhIRnzonUiOEhHvWh3ffd89GW0+vjU76P73AfdA0fkw5svLV1NLVbopXdd1kAe9/gmhelS9qstUs8pACCGEEEIIoam9fgFu/0d2oqBhdAAAAABJRU5ErkJggg=="
+                                alt="Image" class="w-10 h-10">
                             <div class="ml-3">
                                 <div class="text-base font-medium text-red-700 dark:text-red-500 mb-1">CPU Usage</div>
-                                <span id="cpu_meta" class="text-sm font-medium text-gray-500 dark:text-gray-400">- Ghz
-                                    @(-)</span>
+
                                 <span id="cpu_perc"
                                     class="text-sm font-medium text-gray-500 dark:text-gray-400">0%</span>
                             </div>
@@ -83,8 +74,8 @@
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-md p-3">
                         <div class="flex items-center">
-                            <img src="https://img.icons8.com/dotty/160/FAB005/wifi-logo.png" alt="Image"
-                                class="w-10 h-10">
+                            <img src="data:image/png;base64,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"
+                                alt="Image" class="w-10 h-10">
                             <div class="ml-3">
                                 <div class="mb-1 text-base font-medium text-yellow-400 dark:text-indigo-300">NET Usage
                                 </div>
@@ -95,7 +86,7 @@
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-md p-3">
                         <div class="flex items-center">
-                            <img src="https://img.icons8.com/external-prettycons-solid-prettycons/120/40C057/external-ram-devices-prettycons-solid-prettycons.png"
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEJUlEQVR4nO2dvW4UMRRGXaQgVaCDDmoaaCDFJvYi91S2Iyh4J0TFn0SNeAJEPBEiTxBEl0h5AgroICCkREpC1jvemZ2x755PcjXSambP/Xw919e7Si1Z242fmsYfmSb8WWTYj27j/OfpJnxf9LPMCEPH8NM0/puO/sV2s3NfSZNu/EGXL6h2wOYCbP9bR/96c9+tKynqCkQSYHM2YtgXAxnAYdbU/U5JEIDDLBefmN2dh6p2ATgkcnJ4o2oXgEMiF/tjVbsAHOasqvWaqlniAMewq2O4Pfe5o7tpGv8+9/mqkzTA0087d1s/e3x8/Z9LhQOWVeiwmUDm3W/1gM2u0yaGQwAHmYD7jvDSHKwv3U/u/QIYwHULBzum6JyAYIouTLU7eJ7IwQDeUJLVO+DTStPMSlLsdj2n0DH5/OSG+ELH0IDPA9BXVJK6XtdNaLb23J15z7W19/SWjv5D31O+WnXAXd9T7cA5H8AAXnEHt9zd6aq2u0M4uGfAOYuermqzOwTgy19azzl12dItV/FD3lPRkgZ4OuCMUoWWvSo2PU+hK1+ZArCT/V6bK+kO1uwHA1hJFg52AE4FBFN04cLBDgenAgIHFy5phQ7LKhrAZsQAHVw1bTZMFujQ4D24I+C2HRZdtWiHBoCFdXRYAF8UgB05OCcgzufkyRU5s+t1HDyyg89y8qycqTteB/DIgMcelhwMYJMICHHCwQ7AOQEx9rBM0TjYMEWzyBKj2k4XGqZo2acLDYDHBUwtujAB2PGaVNPpQstrkuzThRbA/QKmJ6twAdiRg1MBQdts4aLx3eHgVEDg4MKFgx0OTgUEDi5cONjh4FRA4ODChYMdDk4FBJWswkUly+HgVEBwurBwcbrQ4eA+A8JyurAuBwN4hZvuJpwuHF+cLnTk4JyAGHtYWnaW6+CxhwUwgM2IlbjBhYMdgHMCYuxhmaJxsGGK7rDI4nRhWeJ0oSMH9xkQllp03Q4GcGGS9t+FllV0v4A5XVi4aNlxLLJSAUHTXeGibdbh4FRA0PheuHCww8GpgMDBhQsHOxycCggcXLikO3jlBWDhklbJmg74w2xVSBpgPdA/sVWjmjYbJgv8j1JujhcnaacLDYD7Bdz3qtsO3GiPgwFct6o7XRjbdZAs2gEiTrWdLpxmLOoW+X1pcart6IrNBLLylS8AOxxcsoN1x1U4U3ThU7QGsOwcrAEMYCN5it5u/NQ0/mhZjhnbwfMkPgfrxh8sc0oE8MjqCqQ0wNOMQkeb3ScBDpYFWLfcvWq7+wTgwgCbfoPll456TdUsaQ42fY7oj1XtAnBIQX6laheAwwz3hpNHe+6Bql0ADrPc+1ZJEIDD/4ur6L9s7rt1JUHSCh2mwzh9J36p47NrSorMrtMmhsNVBawb/0PH8NU04bmO7t7QAP4Cq7xojXmOCLoAAAAASUVORK5CYII="
                                 alt="Image" class="w-10 h-10">
                             <div class="ml-3">
                                 <div class="mb-1 text-base font-medium text-blue-700 dark:text-blue-500">RAM Usage
@@ -110,8 +101,8 @@
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 rounded-md p-3">
                         <div class="flex items-center">
-                            <img src="https://img.icons8.com/ios-filled/100/7950F2/cd--v1.png" alt="Image"
-                                class="w-10 h-10">
+                            <img src="data:image/png;base64,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"
+                                alt="Image" class="w-10 h-10">
                             <div class="ml-3">
                                 <div class="mb-1 text-base font-medium text-green-700 dark:text-green-500">DISK
                                     Usage
@@ -132,15 +123,16 @@
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-1/2">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <img src="https://img.icons8.com/color/48/bittorrent.png" class="w-5 h-5" alt="Image">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFE0lEQVR4nO1ZW4gcVRCdjfH9BAn4oX4ovvGBKGqCrEQJStRE4VbNZsXVD4NRVgkbTZade6/6ER9ZBB8/KiJoVIwSCGpiDDpd1ZMYdUHFZ1BjDKKCySZCNEZ3d6S6e2buPHZ6ZnsmrjAF/VMzffuce6tOVXWnUh3rWMdaYPkuC3SxAW/AIL9mkD7VSLsN8l8GecwAjWqgbRp4nUZ6wKJ/lVVfHJb6r21Q8SyNbDTQ9wY538ylgX8zwE9lVO6sgw78vhtzxxrgVRrpj2aBVxOhcYP06hDSKQcFvEb/OoP0U1LgVRfwPgPcL+HYJuj5Lo280iBNtBw8ukRo7cAtG49uKXTbnZ2pgV5sK3AsI7F1xcJNJ7YIfr7LID1/0MBjMTc+tip7TGL4BujBhh6I9KMBesYo6hNJtSp7kr1+5CgDfHsCEm8mygmNfHWoEpMriAZ6XXS93oMM8t4pk0BaNiXwS9WWIw3y9skXJy+jvPPrraHUmkOSnIAJ68X+Icyd3jQBKVCT7MiB2nKX79LKu0IjD2ugDRr4a3l4a/KB1zUF3vZuPU7Kfw11GNXAc9z/9l+7/nA55iAH2pbUNCF51fjup/me6p3nPVblLir7H/g3GKDvHII7DNATUuys4nOXq03HSyhKlbVI85KRpJcaJmCQRip2/m+tuLv8PzxUKGpBuKT9m+LX9ZdPmQDwvoZk1Sr/1BoxeH95RaZnC0cbdJfd2Zlx6y5ePHKoQX4nSShZ9G6OJSA6XhE6H1qbn1H4XcgU1MGgr8rI2/yMIKyk8AF/Fcon/WmAdxrkXS1I5qdjCWikJ8tuSvNlRYDgXxP09xI6invKwKdprgb6rH2JzKKAH8QTAN7oxN27rqZLrEf+h8tOLRxkxqL7tkusZ8C/UJJYGjNJaIO8RNqDRCSARhsgUNpFjbSgBDIqSEA7bF/2iKIfvXvD46VxqR31J62go12dKA/6Ss+ejEA4XQGNumCimM5nwL+14LNIszXyP7VCatL1kZYlITCoeFbMA/jbiMDaElA+M0roPaImhd00yFsi/8qyNRR3G6D1Guj3YFBBymngu4S8Afo1CYEVcW22Qf4oJOANVMS4AF1dOimeE+XDz+4AIm1GvQYw2UUTkov1TwBoQ6g+NN859leCBRT1OQQeiwisKvm8S9sHniUnd9cFH4Ll4SBZ0nyBQyob+miuQ+C9wIc0z7k3UYKaWBVijiVgkDAAtsg/zfF9E/h6smdX+tzXIgVf+06Ah2MJ2N7syRJrmR7vDGe3A/3PoHdOlSo5vmKdaNNlgRfGEghDgXy3Ahvk9xsJIekY20hgb2wNcAAvkZ7G2e2Xw92m2xywj1YmsU3nLnEqcqvj/4VUoyayqBXdWVlthUgRLNLsKC5/KZPRNN3daiXSQOOZtH9eqhlzb5CEri5kQRhtjh7wiHuvRu9Kjfy2/L81JGhNKqkVeySnFljwLy+2EkC9qelsJpJXGQvLmjng/sIxy3AjM3JqOpqVYQXpk1ohY9K8tJC8GvgHAzQo87NdkD0hNZ3MBiFDB4I6gd6iygauQLBFqsMtebVYaaJO0U7vzygPqk4pTfMN8nMa6cupJrEG3izfIFLtsmINkKEe+CFXmf43ZhTfESpQkBPbwgG/bR8n2mNh3PPnTtzulO9eEkYyB0+7JK5l8k4olNKmO9FdGuhxmfZS08VkoJE3Fgb4rWg0HRPVir5ISvf6htQKmeZiJ6uOdaxjqUbsXxQuzeHxgHUcAAAAAElFTkSuQmCC"
+                        class="w-5 h-5" alt="Image">
                 </div>
                 <input type="text" id="url_entry"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Magnet, HTTP, FTP Link" required>
             </div>
             <button type="" id="url_submit"
-                class="p-2.5 ml-2 text-sm font-medium text-white bg-red-400 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-rec-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                <img src="https://img.icons8.com/external-mixed-line-solid-yogi-aprelliyanto/64/external-download-web-hosting-mixed-line-solid-yogi-aprelliyanto.png"
+                class="p-2.5 ml-2 text-sm font-medium text-white bg-red-600 rounded-lg border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-rec-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                <img src="data:image/png;base64,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"
                     class="w-5 h-5" alt="Image">
                 <span class="sr-only">Search</span>
             </button>
@@ -168,10 +160,53 @@
         </div>
     </div>
 
+  
+
+    <div id="torrent_modal" tabindex="-1" aria-hidden="true"
+        class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-2xl max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white" id="modal_name">
+                        John Wick Chapter 4 (2023) [720p] [WEBRip] [YTS.MX]
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        aria-label="Close" onclick="hideModal('torrent_modal')">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div class="flex justify-between">
+                        <div id="modal_meta"></div>
+                        <span id="modal_perc" class="text-sm font-medium text-blue-700 dark:text-white">45%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-1 dark:bg-gray-700">
+                        <div id="modal_progress" class="bg-blue-600 h-1 rounded-full" style="width: 45%"></div>
+                    </div>
+
+                    <div class="flex justify-between mb-1">
+                        <span class="text-base font-medium text-blue-700 dark:text-white">Seeds</span>
+                        <span class="text-sm font-medium text-blue-700 dark:text-white">45</span>
+                    </div>
+                    <!-- Files manager -->
+                    <div class="flow-root" id="files_manager"></div>
+                </div>
+                <!-- Modal footer -->
+                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    Buttons ToDo
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
     <script src="/assets/js/misc.js"></script>
     <script src="/assets/js/app.js"></script>
-    
-
 </html>

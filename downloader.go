@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"path/filepath"
 	"sort"
 	"strings"
 
@@ -89,4 +90,26 @@ func sortTorrents(ts []ActiveTorrent) []ActiveTorrent {
 		return ts[i].OrderID < ts[j].OrderID
 	})
 	return ts
+}
+
+type torrentFile struct {
+	Name string `json:"name,omitempty"`
+	Path string `json:"path,omitempty"`
+	Size string `json:"size,omitempty"`
+}
+
+func getTorrentFilesList(torrent *t.Torrent) []torrentFile {
+	var files []torrentFile
+	torrF, err := torrent.Files()
+	if err != nil {
+		return files
+	}
+	for _, f := range torrF {
+		files = append(files, torrentFile{
+			Path: f.Path(),
+			Size: BytesSI(uint64(f.Stats().BytesCompleted)),
+			Name: filepath.Base(f.Path()),
+		})
+	}
+	return files
 }

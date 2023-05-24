@@ -88,3 +88,4 @@ function Alert(message, level) {
     }
         , 5000);
 }
+
